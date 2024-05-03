@@ -14,7 +14,6 @@
 # devtools::install()
 devtools::load_all() # Automatically points to the current directory as the package root
 
-
 # varsome ----
 # LE = less than equal to, GE = greater than equal to
 # varsome <- read.csv(file = "../../data/singlecase/varsome_calibrated_insilico_thresholds.tsv", sep="\t")
@@ -31,17 +30,15 @@ input_path <- "../data/phrtmma_v1_chr21_40411318_41411317.csv"
 
 # input list of files
 input_path <- c(
-  "../data/phrtmma_v1_chr21_40411318_41411317.csv",
-  "../data/phrtmma_v1_chr21_41411318_42411317.csv",
-  "../data/phrtmma_v1_chr21_42411318_43411317.csv"
+"../data/phrtmma_v1_chr21_40411318_41411317.csv",
+"../data/phrtmma_v1_chr21_41411318_42411317.csv",
+"../data/phrtmma_v1_chr21_42411318_43411317.csv"
 )
 
 # input all files
 input_path <- "../data/"
 
 # start analysis ----
-
-
 
 processed_data_list <- process_genetic_data(input_path, samples_file_path, af_threshold)
 
@@ -90,3 +87,113 @@ plot_variants_per_criteria(all_data, file_suffix)
 
 
 df_test <- apply_acmg_pp3_with_external_scores(df, varsome_data)
+
+# select ----
+# use dt to make selection using manual list or indexes
+# manually select columns to report
+
+columns_to_select <- c(
+  "sample",
+  "comp_het_flag",
+  "SYMBOL",
+  "ACMG_PVS1",
+  "ACMG_PS1",
+  "ACMG_PS5",
+  "ACMG_PM2",
+  "ACMG_PM3",
+  "ACMG_highest",
+  "ACMG_count",
+  "AF.x",
+  "CLIN_SIG",
+  "IMPACT",
+  "genotype",
+  # "Inheritance",
+  "gnomAD_AF",
+  # "Engine",
+  "Strong_pathogenic_GE",
+  "Moderate_pathogenic_GE",
+  "Supporting_pathogenic_GE",
+  "BayesDel_addAF_score",
+  "BayesDel_noAF_score",
+  # "CADD_PHRED",
+  "DANN_score",
+  "Eigen.raw_coding",
+  "Eigen.PC.phred_coding",
+  "FATHMM_score",
+  "fathmm.MKL_coding_score",
+  "fathmm.XF_coding_score",
+  "LRT_score",
+  "M.CAP_score",
+  "MetaLR_score",
+  "MetaSVM_score",
+  "MetaRNN_score",
+  "MutPred_score",
+  "MutationAssessor_score",
+  "MutationTaster_score",
+  "phastCons100way_vertebrate",
+  "Polyphen2_HDIV_score",
+  "Polyphen2_HVAR_score",
+  "PROVEAN_score",
+  "REVEL_score",
+  "SIFT_score"
+)
+
+# df_selected <- df %>% dplyr::select(dplyr::all_of(columns_to_select))
+library(data.table)
+dt <- as.data.table(all_data)
+first_50_indices <- 1:50
+first_50_names <- names(dt)[first_50_indices]
+all_columns <- unique(c(first_50_names, columns_to_select)) # all column names
+dt_selected <- dt[, ..all_columns] # Select columns in data.table
+
+# Report ----
+
+library(dplyr)
+dt_selected <- dt_selected |> dplyr::filter(ACMG_count >= 2)
+dt_test <- dt_selected |> head(1)
+
+dt_test <- dt_test |> select(sample, HGVSc, HGVSp, ACMG_count)
+# write.csv(dt_test, "../output/dt_test.csv", row.names = FALSE)
+write.csv(dt_test, "../output/dt_test.csv", row.names = FALSE, quote = FALSE)
+
+names(dt_test)
+
+# sample ID
+dt_test$sample
+# has coding variant:
+dt_test$HGVSc
+# which encodes the protein variant:
+dt_test$HGVSp
+# and is given a ACMG score:
+dt_test$ACMG_count
+
+# Assuming dt_test is already prepared and contains at least one row
+dt_test <- dt_selected |> head(1) |> dplyr::select(sample, HGVSc, HGVSp, ACMG_count)
+
+
+# Function to escape LaTeX special characters in text
+escape_latex <- function(text) {
+  text <- gsub("_", "\\\\_", text)
+return(text)
+}
+
+# Assuming dt_test is prepared
+dt_test <- dt_selected |> head(1) |> dplyr::select(sample, HGVSc, HGVSp, ACMG_count)
+
+# Apply the escape function
+dt_test <- data.frame(lapply(dt_test, escape_latex), stringsAsFactors = FALSE)
+
+# Prepare LaTeX commands
+latex_commands <- sprintf("
+\\newcommand{\\SampleID}{%s}
+\\newcommand{\\CodingVariant}{%s}
+\\newcommand{\\ProteinVariant}{%s}
+\\newcommand{\\ACMGScore}{%s}
+",
+dt_test$sample,
+dt_test$HGVSc,
+dt_test$HGVSp,
+dt_test$ACMG_count)
+
+# Write LaTeX commands to a file
+writeLines(latex_commands, "../output/variables.tex")

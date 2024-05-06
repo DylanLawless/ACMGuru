@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.7.19)  3 MAY 2024 12:39
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.7.19)  6 MAY 2024 13:39
  restricted system commands enabled.
 **report.tex
 (./report.tex
@@ -34,7 +34,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.126 seconds
+luaotfload | main : initialization completed in 0.153 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -1429,16 +1429,23 @@ File: ../output/aggregate_variants_per_criteria.pdf Graphic file (type pdf)
 Package luatex.def Info: ../output/aggregate_variants_per_criteria.pdf  used on 
 input line 91.
 (luatex.def)             Requested size: 227.6539pt x 126.4744pt.
+
+Overfull \hbox (0.11914pt too wide) in paragraph at lines 101--112
+\TU/SourceSansPro--Light(0)/m/n/10 (SMOC) ([][]$\TU/lmtt/m/n/10 http://smoc.eth
+z.ch$[][]\TU/SourceSansPro--Light(0)/m/n/10 ). The Il-lu-mina No-vaseq6000 plat
+-form was used in com-bi-na-tion with TruSeq DNA 
+ []
+
 LaTeX Font Info:    Font shape `TU/SourceSansPro--Light(0)/m/it' will be
 (Font)              scaled to size 8.97919pt on input line 120.
- [1
+[1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<../output
 /aggregate_variants_per_criteria.pdf>]
 LaTeX Font Info:    Font shape `TU/SourceSansPro--Light(0)/bx/n' will be
 (Font)              scaled to size 10.6419pt on input line 135.
  [2]
-<images/fastqc/p1.png, id=131, 742.4538pt x 542.025pt>
+<images/fastqc/p1.png, id=132, 742.4538pt x 542.025pt>
 File: images/fastqc/p1.png Graphic file (type png)
 <use images/fastqc/p1.png>
 Package luatex.def Info: images/fastqc/p1.png  used on input line 251.
@@ -1447,7 +1454,7 @@ Package luatex.def Info: images/fastqc/p1.png  used on input line 251.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fastqcr/p2.png, id=132, 1204.5pt x 602.25pt>
+<images/fastqcr/p2.png, id=133, 1204.5pt x 602.25pt>
 File: images/fastqcr/p2.png Graphic file (type png)
 <use images/fastqcr/p2.png>
 Package luatex.def Info: images/fastqcr/p2.png  used on input line 264.
@@ -1455,7 +1462,7 @@ Package luatex.def Info: images/fastqcr/p2.png  used on input line 264.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fastqcr/p3.png, id=133, 1204.5pt x 602.25pt>
+<images/fastqcr/p3.png, id=134, 1204.5pt x 602.25pt>
 File: images/fastqcr/p3.png Graphic file (type png)
 <use images/fastqcr/p3.png>
 Package luatex.def Info: images/fastqcr/p3.png  used on input line 274.
@@ -1463,7 +1470,7 @@ Package luatex.def Info: images/fastqcr/p3.png  used on input line 274.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fastqcr/p4.png, id=134, 1204.5pt x 602.25pt>
+<images/fastqcr/p4.png, id=135, 1204.5pt x 602.25pt>
 File: images/fastqcr/p4.png Graphic file (type png)
 <use images/fastqcr/p4.png>
 Package luatex.def Info: images/fastqcr/p4.png  used on input line 282.
@@ -1471,7 +1478,7 @@ Package luatex.def Info: images/fastqcr/p4.png  used on input line 282.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fastqcr/p5.png, id=135, 1204.5pt x 602.25pt>
+<images/fastqcr/p5.png, id=136, 1204.5pt x 602.25pt>
 File: images/fastqcr/p5.png Graphic file (type png)
 <use images/fastqcr/p5.png>
 Package luatex.def Info: images/fastqcr/p5.png  used on input line 291.
@@ -1479,7 +1486,7 @@ Package luatex.def Info: images/fastqcr/p5.png  used on input line 291.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fastqc/p6.png, id=136, 841.7046pt x 505.89pt>
+<images/fastqc/p6.png, id=137, 841.7046pt x 505.89pt>
 File: images/fastqc/p6.png Graphic file (type png)
 <use images/fastqc/p6.png>
 Package luatex.def Info: images/fastqc/p6.png  used on input line 304.
@@ -1491,7 +1498,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ] [5<./images/fastqcr/p4.png><./images/fastqcr/p5.png>] [6<./images/fastqc/p6.pn
 g>]
 <images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_mapping_qual
-ity_histogram.png, id=189, 1027.84pt x 770.88pt>
+ity_histogram.png, id=190, 1027.84pt x 770.88pt>
 File: images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_mapping
 _quality_histogram.png Graphic file (type png)
 <use images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_mapping_
@@ -1500,7 +1507,7 @@ Package luatex.def Info: images/qualimap/AH_S1_L001.sort_stats/images_qualimapRe
 port/genome_mapping_quality_histogram.png  used on input line 373.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_mapping_qual
-ity_histogram.png, id=190, 1027.84pt x 770.88pt>
+ity_histogram.png, id=191, 1027.84pt x 770.88pt>
 File: images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_mapping
 _quality_histogram.png Graphic file (type png)
 <use images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_mapping_
@@ -1509,7 +1516,7 @@ Package luatex.def Info: images/qualimap/CH_S2_L001.sort_stats/images_qualimapRe
 port/genome_mapping_quality_histogram.png  used on input line 374.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverage_his
-togram.png, id=191, 1027.84pt x 770.88pt>
+togram.png, id=192, 1027.84pt x 770.88pt>
 File: images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverag
 e_histogram.png Graphic file (type png)
 <use images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverage
@@ -1518,7 +1525,7 @@ Package luatex.def Info: images/qualimap/AH_S1_L001.sort_stats/images_qualimapRe
 port/genome_coverage_histogram.png  used on input line 385.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverage_his
-togram.png, id=192, 1027.84pt x 770.88pt>
+togram.png, id=193, 1027.84pt x 770.88pt>
 File: images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverag
 e_histogram.png Graphic file (type png)
 <use images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverage
@@ -1527,7 +1534,7 @@ Package luatex.def Info: images/qualimap/CH_S2_L001.sort_stats/images_qualimapRe
 port/genome_coverage_histogram.png  used on input line 386.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_uniq_read_st
-arts_histogram.png, id=193, 1027.84pt x 770.88pt>
+arts_histogram.png, id=194, 1027.84pt x 770.88pt>
 File: images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_uniq_re
 ad_starts_histogram.png Graphic file (type png)
 <use images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_uniq_rea
@@ -1536,7 +1543,7 @@ Package luatex.def Info: images/qualimap/AH_S1_L001.sort_stats/images_qualimapRe
 port/genome_uniq_read_starts_histogram.png  used on input line 397.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_uniq_read_st
-arts_histogram.png, id=194, 1027.84pt x 770.88pt>
+arts_histogram.png, id=195, 1027.84pt x 770.88pt>
 File: images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_uniq_re
 ad_starts_histogram.png Graphic file (type png)
 <use images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_uniq_rea
@@ -1545,7 +1552,7 @@ Package luatex.def Info: images/qualimap/CH_S2_L001.sort_stats/images_qualimapRe
 port/genome_uniq_read_starts_histogram.png  used on input line 398.
 (luatex.def)             Requested size: 154.16934pt x 115.627pt.
 <images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverage_acr
-oss_reference.png, id=195, 1027.84pt x 770.88pt>
+oss_reference.png, id=196, 1027.84pt x 770.88pt>
 File: images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverag
 e_across_reference.png Graphic file (type png)
 <use images/qualimap/AH_S1_L001.sort_stats/images_qualimapReport/genome_coverage
@@ -1554,7 +1561,7 @@ Package luatex.def Info: images/qualimap/AH_S1_L001.sort_stats/images_qualimapRe
 port/genome_coverage_across_reference.png  used on input line 409.
 (luatex.def)             Requested size: 308.35437pt x 231.26578pt.
 <images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverage_acr
-oss_reference.png, id=196, 1027.84pt x 770.88pt>
+oss_reference.png, id=197, 1027.84pt x 770.88pt>
 File: images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverag
 e_across_reference.png Graphic file (type png)
 <use images/qualimap/CH_S2_L001.sort_stats/images_qualimapReport/genome_coverage
@@ -1589,11 +1596,11 @@ vari-ants:
  []
 
 
-Overfull \hbox (19.95361pt too wide) in paragraph at lines 528--536
-\TU/SourceSansPro--Light(0)/m/n/10 for anal-y-sis. \TU/SourceSansPro--Light(0)/
-bx/n/10 [2] \TU/SourceSansPro--Light(0)/m/n/10 Based on QC af-ter align-ment to
- ref-er-ence genome GRCh37 (sec. [][]5.3[][]), \TU/SourceSansPro--Light(0)/bx/n
-/10 Sam-ple ID: []MMA_-PHRT_-D.MMA003_-DNA[] 
+Overfull \hbox (3.69147pt too wide) in paragraph at lines 528--536
+\TU/SourceSansPro--Light(0)/m/n/10 anal-y-sis. \TU/SourceSansPro--Light(0)/bx/n
+/10 [2] \TU/SourceSansPro--Light(0)/m/n/10 Based on QC af-ter align-ment to ref
+-er-ence genome GRCh37 (sec. [][]5.3[][]), \TU/SourceSansPro--Light(0)/bx/n/10 
+Sam-ple ID: []XYZ_-STUDY_-D.XYZ003_-DNA[] 
  []
 
 No file report.bbl.
@@ -1605,18 +1612,14 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 550.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 550.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 8B96206C740E26F29FD34FB431C6580E;816.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 )
 
 Here is how much of LuaTeX's memory you used:
  25075 strings out of 494413
  125171,794899 words of node,token memory allocated
- 595 words of node memory still in use:
-   3 hlist, 1 vlist, 1 rule, 4 glue, 6 attribute, 86 glue_spec, 6 attribute_list
-, 1 write nodes
+ 605 words of node memory still in use:
+   3 hlist, 1 vlist, 1 rule, 4 glue, 7 attribute, 86 glue_spec, 7 attribute_list
+, 1 write, 1 pdf_action nodes
    avail lists: 1:3,2:2214,3:290,4:140,5:698,6:63,7:5983,8:88,9:659,10:12,11:297
 
  28302 multiletter control sequences out of 65536+600000
@@ -1627,10 +1630,10 @@ sPro-LightIt.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lm
 mono10-regular.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/adobe/sour
 cesanspro/SourceSansPro-Light.otf></usr/local/texlive/2018/texmf-dist/fonts/open
 type/adobe/sourcesanspro/SourceSansPro-Regular.otf>
-Output written on report.pdf (11 pages, 1044272 bytes).
+Output written on report.pdf (11 pages, 1044490 bytes).
 
-PDF statistics: 280 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
+PDF statistics: 281 PDF objects out of 1000 (max. 8388607)
+ 223 compressed objects within 3 object streams
  53 named destinations out of 1000 (max. 131072)
  113 words of extra memory for PDF output out of 10000 (max. 100000000)
 

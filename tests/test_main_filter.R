@@ -26,13 +26,13 @@ samples_file_path <- "../data/samples.tsv" # phenotype data
 output_path <- "../output/"
 
 # input single file
-input_path <- "../data/phrtmma_v1_chr21_40411318_41411317.csv"
+input_path <- "../data/study_v1_chr21_40411318_41411317.csv"
 
 # input list of files
 input_path <- c(
-"../data/phrtmma_v1_chr21_40411318_41411317.csv",
-"../data/phrtmma_v1_chr21_41411318_42411317.csv",
-"../data/phrtmma_v1_chr21_42411318_43411317.csv"
+"../data/study_v1_chr21_40411318_41411317.csv",
+"../data/study_v1_chr21_41411318_42411317.csv",
+"../data/study_v1_chr21_42411318_43411317.csv"
 )
 
 # input all files
@@ -86,7 +86,7 @@ plot_variants_per_criteria(all_data, file_suffix)
 # write.csv(all_data, paste0("../output/aggregated_data_", Sys.Date(), ".csv"), row.names = FALSE)
 
 
-df_test <- apply_acmg_pp3_with_external_scores(df, varsome_data)
+# df_test <- apply_acmg_pp3_with_external_scores(df, varsome_data)
 
 # select ----
 # use dt to make selection using manual list or indexes
@@ -206,8 +206,8 @@ writeLines(latex_commands, "../output/variables.tex")
 SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
 
 # List of all ACMG labels
-acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                  "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4")
 
 # Check if each ACMG column exists, if not create it and fill with NA
@@ -226,7 +226,7 @@ df$ACMG_count <- rowSums(!is.na(df[, acmg_labels ]))
 df <- df %>% dplyr::select(ACMG_count, everything())
 # df$ACMG_count[df$ACMG_count == 0] <- NA
 
-p.criteria_count_each_gene <- df |> 
+p.criteria_count_each_gene <- df |>
   filter(ACMG_count > 1) |>
   ggplot(aes(y = ACMG_count, x = SYMBOL)) +
   geom_point() +
@@ -238,7 +238,7 @@ p.criteria_count_each_gene
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
 
 # as table
-df |> 
+df |>
   filter(ACMG_count > 1) |>
   dplyr::select(sample, SYMBOL, ACMG_count) |>
   arrange(desc(ACMG_count))
@@ -253,10 +253,10 @@ p.criteria_gene_total <- df %>%
   theme_minimal() +
   xlab("No. ACMG criteria (P) variants per gene") +
   ylab("Number of genes") +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.criteria_gene_total 
+p.criteria_gene_total
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
 
 # as table
@@ -266,13 +266,13 @@ df |>
   na.omit() |>
   arrange(desc(acmg_count_per_symbol))
 
-p.variants_per_criteria <- df |> 
+p.variants_per_criteria <- df |>
   ggplot(aes(x = ACMG_count, fill=..x..)) +
   geom_histogram(binwidth = 1, color="black") +
   xlab("No. ACMG criteria\nassigned (P)") +
   ylab("No. variants") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.variants_per_criteria
@@ -286,14 +286,14 @@ p.criteria_per_sample <- df %>%
   geom_histogram(binwidth = 1, color = "black") +
   labs(x = "No. ACMG criteria\nassigned (P)", y = "No. samples") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_per_sample
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
 
 # as table
-df |> 
+df |>
   group_by(sample, ACMG_count) |>
   tally(n = "count_per_sample") |>
   ungroup() |>
@@ -304,15 +304,15 @@ df |>
 # ACMG Verdict----
 # Rules are combined using the point system described in PMID:32720330
 # Each rule triggered is assigned a number of points based on the strength of the evidence provided:
-# 
+#
 # Supporting: 1 point
 # Moderate: 2 points
 # Strong: 4 points
 # Very Strong: 8 points
 # A total score is computed as the sum of the points from the pathogenic rules, minus the sum of the points from benign rules.
-# 
+#
 # The total score is then compared to thresholds to assign the final verdict:
-# 	
+#
 # Pathogenic if greater than or equal to 10,
 # Likely Pathogenic if between 6 and 9 inclusive,
 # Uncertain Significance if between 0 and 5,
@@ -321,8 +321,8 @@ df |>
 
 # Benign if less than or equal to -7.
 
-df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                            "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4",
                            everything())
 
@@ -346,7 +346,7 @@ acmg_columns <- grep("ACMG_P", colnames(df), value = TRUE)
 acmg_columns
 
 # Mutate all ACMG columns
-df <- df %>% 
+df <- df %>%
   mutate_at(acmg_columns, function(x) acmg_scores[x])
 
 # Replace NAs with 0 in ACMG columns only
@@ -357,23 +357,23 @@ df$ACMG_total_score <- rowSums(df[acmg_columns])
 
 df <- df |> dplyr::select(ACMG_total_score, everything())
 
-p.acmg_score <- df |> 
+p.acmg_score <- df |>
 	ggplot(aes(x = as.character(ACMG_total_score), fill= as.numeric(ACMG_total_score) )) +
 	geom_histogram(stat='count', bins = length(acmg_scores), color="black") +
 	theme_minimal() +
 	xlab("ACMG score") +
 	ylab("No. variants") +
-	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
 	guides(fill=FALSE) +
 	scale_fill_scico(palette = 'bamako', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.acmg_score 
+p.acmg_score
 ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
 
 
 # acmg tally  ----
 # List of all ACMG labels
-acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                  "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4")
 
 # Check if each ACMG column exists, if not create it and fill with NA
@@ -392,7 +392,7 @@ df$ACMG_count <- rowSums(!is.na(df[, acmg_labels ]))
 df <- df %>% dplyr::select(ACMG_count, everything())
 # df$ACMG_count[df$ACMG_count == 0] <- NA
 
-p.criteria_count_each_gene <- df |> 
+p.criteria_count_each_gene <- df |>
   filter(ACMG_count > 1) |>
   ggplot(aes(y = ACMG_count, x = SYMBOL)) +
   geom_point() +
@@ -404,7 +404,7 @@ p.criteria_count_each_gene
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
 
 # as table
-df |> 
+df |>
   filter(ACMG_count > 1) |>
   dplyr::select(sample, SYMBOL, ACMG_count) |>
   arrange(desc(ACMG_count))
@@ -419,10 +419,10 @@ p.criteria_gene_total <- df %>%
   theme_minimal() +
   xlab("No. ACMG criteria (P) variants per gene") +
   ylab("Number of genes") +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.criteria_gene_total 
+p.criteria_gene_total
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
 
 # as table
@@ -432,13 +432,13 @@ df |>
   na.omit() |>
   arrange(desc(acmg_count_per_symbol))
 
-p.variants_per_criteria <- df |> 
+p.variants_per_criteria <- df |>
   ggplot(aes(x = ACMG_count, fill=..x..)) +
   geom_histogram(binwidth = 1, color="black") +
   xlab("No. ACMG criteria\nassigned (P)") +
   ylab("No. variants") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.variants_per_criteria
@@ -452,14 +452,14 @@ p.criteria_per_sample <- df %>%
   geom_histogram(binwidth = 1, color = "black") +
   labs(x = "No. ACMG criteria\nassigned (P)", y = "No. samples") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_per_sample
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
 
 # as table
-df |> 
+df |>
   group_by(sample, ACMG_count) |>
   tally(n = "count_per_sample") |>
   ungroup() |>
@@ -470,15 +470,15 @@ df |>
 # ACMG Verdict----
 # Rules are combined using the point system described in PMID:32720330
 # Each rule triggered is assigned a number of points based on the strength of the evidence provided:
-# 
+#
 # Supporting: 1 point
 # Moderate: 2 points
 # Strong: 4 points
 # Very Strong: 8 points
 # A total score is computed as the sum of the points from the pathogenic rules, minus the sum of the points from benign rules.
-# 
+#
 # The total score is then compared to thresholds to assign the final verdict:
-# 	
+#
 # Pathogenic if greater than or equal to 10,
 # Likely Pathogenic if between 6 and 9 inclusive,
 # Uncertain Significance if between 0 and 5,
@@ -487,8 +487,8 @@ df |>
 
 # Benign if less than or equal to -7.
 
-df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                            "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4",
                            everything())
 
@@ -512,7 +512,7 @@ acmg_columns <- grep("ACMG_P", colnames(df), value = TRUE)
 acmg_columns
 
 # Mutate all ACMG columns
-df <- df %>% 
+df <- df %>%
   mutate_at(acmg_columns, function(x) acmg_scores[x])
 
 # Replace NAs with 0 in ACMG columns only
@@ -523,23 +523,23 @@ df$ACMG_total_score <- rowSums(df[acmg_columns])
 
 df <- df |> dplyr::select(ACMG_total_score, everything())
 
-p.acmg_score <- df |> 
+p.acmg_score <- df |>
 	ggplot(aes(x = as.character(ACMG_total_score), fill= as.numeric(ACMG_total_score) )) +
 	geom_histogram(stat='count', bins = length(acmg_scores), color="black") +
 	theme_minimal() +
 	xlab("ACMG score") +
 	ylab("No. variants") +
-	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
 	guides(fill=FALSE) +
 	scale_fill_scico(palette = 'bamako', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.acmg_score 
+p.acmg_score
 ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
 
 
 # acmg tally  ----
 # List of all ACMG labels
-acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                  "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4")
 
 # Check if each ACMG column exists, if not create it and fill with NA
@@ -558,7 +558,7 @@ df$ACMG_count <- rowSums(!is.na(df[, acmg_labels ]))
 df <- df %>% dplyr::select(ACMG_count, everything())
 # df$ACMG_count[df$ACMG_count == 0] <- NA
 
-p.criteria_count_each_gene <- df |> 
+p.criteria_count_each_gene <- df |>
   filter(ACMG_count > 1) |>
   ggplot(aes(y = ACMG_count, x = SYMBOL)) +
   geom_point() +
@@ -570,7 +570,7 @@ p.criteria_count_each_gene
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
 
 # as table
-df |> 
+df |>
   filter(ACMG_count > 1) |>
   dplyr::select(sample, SYMBOL, ACMG_count) |>
   arrange(desc(ACMG_count))
@@ -585,10 +585,10 @@ p.criteria_gene_total <- df %>%
   theme_minimal() +
   xlab("No. ACMG criteria (P) variants per gene") +
   ylab("Number of genes") +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.criteria_gene_total 
+p.criteria_gene_total
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
 
 # as table
@@ -598,13 +598,13 @@ df |>
   na.omit() |>
   arrange(desc(acmg_count_per_symbol))
 
-p.variants_per_criteria <- df |> 
+p.variants_per_criteria <- df |>
   ggplot(aes(x = ACMG_count, fill=..x..)) +
   geom_histogram(binwidth = 1, color="black") +
   xlab("No. ACMG criteria\nassigned (P)") +
   ylab("No. variants") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.variants_per_criteria
@@ -618,14 +618,14 @@ p.criteria_per_sample <- df %>%
   geom_histogram(binwidth = 1, color = "black") +
   labs(x = "No. ACMG criteria\nassigned (P)", y = "No. samples") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_per_sample
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
 
 # as table
-df |> 
+df |>
   group_by(sample, ACMG_count) |>
   tally(n = "count_per_sample") |>
   ungroup() |>
@@ -636,15 +636,15 @@ df |>
 # ACMG Verdict----
 # Rules are combined using the point system described in PMID:32720330
 # Each rule triggered is assigned a number of points based on the strength of the evidence provided:
-# 
+#
 # Supporting: 1 point
 # Moderate: 2 points
 # Strong: 4 points
 # Very Strong: 8 points
 # A total score is computed as the sum of the points from the pathogenic rules, minus the sum of the points from benign rules.
-# 
+#
 # The total score is then compared to thresholds to assign the final verdict:
-# 	
+#
 # Pathogenic if greater than or equal to 10,
 # Likely Pathogenic if between 6 and 9 inclusive,
 # Uncertain Significance if between 0 and 5,
@@ -653,8 +653,8 @@ df |>
 
 # Benign if less than or equal to -7.
 
-df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                            "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4",
                            everything())
 
@@ -678,7 +678,7 @@ acmg_columns <- grep("ACMG_P", colnames(df), value = TRUE)
 acmg_columns
 
 # Mutate all ACMG columns
-df <- df %>% 
+df <- df %>%
   mutate_at(acmg_columns, function(x) acmg_scores[x])
 
 # Replace NAs with 0 in ACMG columns only
@@ -689,23 +689,23 @@ df$ACMG_total_score <- rowSums(df[acmg_columns])
 
 df <- df |> dplyr::select(ACMG_total_score, everything())
 
-p.acmg_score <- df |> 
+p.acmg_score <- df |>
 	ggplot(aes(x = as.character(ACMG_total_score), fill= as.numeric(ACMG_total_score) )) +
 	geom_histogram(stat='count', bins = length(acmg_scores), color="black") +
 	theme_minimal() +
 	xlab("ACMG score") +
 	ylab("No. variants") +
-	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
 	guides(fill=FALSE) +
 	scale_fill_scico(palette = 'bamako', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.acmg_score 
+p.acmg_score
 ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
 
 
 # acmg tally  ----
 # List of all ACMG labels
-acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                 "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                  "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4")
 
 # Check if each ACMG column exists, if not create it and fill with NA
@@ -724,7 +724,7 @@ df$ACMG_count <- rowSums(!is.na(df[, acmg_labels ]))
 df <- df %>% dplyr::select(ACMG_count, everything())
 # df$ACMG_count[df$ACMG_count == 0] <- NA
 
-p.criteria_count_each_gene <- df |> 
+p.criteria_count_each_gene <- df |>
   filter(ACMG_count > 1) |>
   ggplot(aes(y = ACMG_count, x = SYMBOL)) +
   geom_point() +
@@ -736,7 +736,7 @@ p.criteria_count_each_gene
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
 
 # as table
-df |> 
+df |>
   filter(ACMG_count > 1) |>
   dplyr::select(sample, SYMBOL, ACMG_count) |>
   arrange(desc(ACMG_count))
@@ -751,10 +751,10 @@ p.criteria_gene_total <- df %>%
   theme_minimal() +
   xlab("No. ACMG criteria (P) variants per gene") +
   ylab("Number of genes") +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.criteria_gene_total 
+p.criteria_gene_total
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
 
 # as table
@@ -764,13 +764,13 @@ df |>
   na.omit() |>
   arrange(desc(acmg_count_per_symbol))
 
-p.variants_per_criteria <- df |> 
+p.variants_per_criteria <- df |>
   ggplot(aes(x = ACMG_count, fill=..x..)) +
   geom_histogram(binwidth = 1, color="black") +
   xlab("No. ACMG criteria\nassigned (P)") +
   ylab("No. variants") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.variants_per_criteria
@@ -784,14 +784,14 @@ p.criteria_per_sample <- df %>%
   geom_histogram(binwidth = 1, color = "black") +
   labs(x = "No. ACMG criteria\nassigned (P)", y = "No. samples") +
   theme_minimal() +
-  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") + 
+  geom_text(stat='count', aes(label=..count.., y=..count..+20), color = "black") +
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_per_sample
 ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
 
 # as table
-df |> 
+df |>
   group_by(sample, ACMG_count) |>
   tally(n = "count_per_sample") |>
   ungroup() |>
@@ -802,15 +802,15 @@ df |>
 # ACMG Verdict----
 # Rules are combined using the point system described in PMID:32720330
 # Each rule triggered is assigned a number of points based on the strength of the evidence provided:
-# 
+#
 # Supporting: 1 point
 # Moderate: 2 points
 # Strong: 4 points
 # Very Strong: 8 points
 # A total score is computed as the sum of the points from the pathogenic rules, minus the sum of the points from benign rules.
-# 
+#
 # The total score is then compared to thresholds to assign the final verdict:
-# 	
+#
 # Pathogenic if greater than or equal to 10,
 # Likely Pathogenic if between 6 and 9 inclusive,
 # Uncertain Significance if between 0 and 5,
@@ -819,8 +819,8 @@ df |>
 
 # Benign if less than or equal to -7.
 
-df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5", 
-                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6", 
+df <-  df |> dplyr::select("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
+                           "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
                            "ACMG_PM7", "ACMG_PP1", "ACMG_PP2", "ACMG_PP3", "ACMG_PP4",
                            everything())
 
@@ -844,7 +844,7 @@ acmg_columns <- grep("ACMG_P", colnames(df), value = TRUE)
 acmg_columns
 
 # Mutate all ACMG columns
-df <- df %>% 
+df <- df %>%
   mutate_at(acmg_columns, function(x) acmg_scores[x])
 
 # Replace NAs with 0 in ACMG columns only
@@ -855,16 +855,16 @@ df$ACMG_total_score <- rowSums(df[acmg_columns])
 
 df <- df |> dplyr::select(ACMG_total_score, everything())
 
-p.acmg_score <- df |> 
+p.acmg_score <- df |>
 	ggplot(aes(x = as.character(ACMG_total_score), fill= as.numeric(ACMG_total_score) )) +
 	geom_histogram(stat='count', bins = length(acmg_scores), color="black") +
 	theme_minimal() +
 	xlab("ACMG score") +
 	ylab("No. variants") +
-	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") + 
+	geom_text(stat='count', aes(label=..count.., y=..count..+300), color = "black") +
 	guides(fill=FALSE) +
 	scale_fill_scico(palette = 'bamako', direction = 1) # batlowK, acton, lajolla, lapaz, turku
-p.acmg_score 
+p.acmg_score
 ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
 
 ....

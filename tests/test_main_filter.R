@@ -199,12 +199,11 @@ dt_test$ACMG_count)
 writeLines(latex_commands, "../output/variables.tex")
 
 
-
-----
-
 # acmg tally  ----
-SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
-
+# SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
+# SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
+# # SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
+# # SEE:  ./archive/AMCGuru_singlecase_vcurrent.R
 # List of all ACMG labels
 acmg_labels <- c("ACMG_PVS1", "ACMG_PS1", "ACMG_PS2", "ACMG_PS3", "ACMG_PS4", "ACMG_PS5",
                  "ACMG_PM1", "ACMG_PM2", "ACMG_PM3", "ACMG_PM4", "ACMG_PM5", "ACMG_PM6",
@@ -235,7 +234,7 @@ p.criteria_count_each_gene <- df |>
   xlab("Gene symbol") +
   ylab("ACMG criteria count (>1)")
 p.criteria_count_each_gene
-ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
+# ggsave(paste("../../data/singlecase/", file_suffix, "criteria_count_each_gene.pdf", sep = "") ,plot = p.criteria_count_each_gene )
 
 # as table
 df |>
@@ -257,7 +256,7 @@ p.criteria_gene_total <- df %>%
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_gene_total
-ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
+# ggsave(paste("../../data/singlecase/", file_suffix, "criteria_gene_total.pdf", sep = "") ,plot = p.criteria_gene_total )
 
 # as table
 df |>
@@ -276,7 +275,7 @@ p.variants_per_criteria <- df |>
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.variants_per_criteria
-ggsave(paste("../../data/singlecase/", file_suffix, "variants_per_criteria.pdf", sep = "") ,plot = p.variants_per_criteria , width = 9, height = 5)
+# ggsave(paste("../../data/singlecase/", file_suffix, "variants_per_criteria.pdf", sep = "") ,plot = p.variants_per_criteria , width = 9, height = 5)
 
 # Check we only have approx. 1 "casual" variant per sample
 p.criteria_per_sample <- df %>%
@@ -290,7 +289,7 @@ p.criteria_per_sample <- df %>%
   guides(fill=FALSE) +
   scale_fill_scico(palette = 'acton', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.criteria_per_sample
-ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
+# ggsave(paste("../../data/singlecase/", file_suffix, "criteria_per_sample.pdf", sep = "") ,plot = p.criteria_per_sample )
 
 # as table
 df |>
@@ -367,7 +366,7 @@ p.acmg_score <- df |>
 	guides(fill=FALSE) +
 	scale_fill_scico(palette = 'bamako', direction = 1) # batlowK, acton, lajolla, lapaz, turku
 p.acmg_score
-ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
+# ggsave(paste("../../data/singlecase/", file_suffix, "acmg_score.pdf", sep = "") ,plot = p.acmg_score )
 
 
 # acmg tally  ----

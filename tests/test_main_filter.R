@@ -168,7 +168,10 @@ dt_test$HGVSp
 dt_test$ACMG_count
 
 # Assuming dt_test is already prepared and contains at least one row
-dt_test <- dt_selected |> head(1) |> dplyr::select(sample, HGVSc, HGVSp, ACMG_count)
+# # Assuming dt_test is already prepared and contains at least one row
+dt_selected_sub <- dt_selected |> dplyr::select(sample, HGVSc, HGVSp, ACMG_count)
+
+dt_test <- dt_selected_sub |> head(1) |> dplyr::select(sample, HGVSc, HGVSp, ACMG_count)
 
 
 # Function to escape LaTeX special characters in text
@@ -340,7 +343,7 @@ df$ACMG_score[is.na(df$ACMG_score)] <- 0
 df <- df |> dplyr::select(ACMG_score, everything())
 
 
-
+ls()
 
 
 

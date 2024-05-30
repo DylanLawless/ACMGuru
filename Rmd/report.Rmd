@@ -1,0 +1,45 @@
+---
+title: "Genomic Analysis Report"
+author: "Dylan Lawless, PhD"
+affiliation: "Department of Intensive Care and Neonatology, University Children's Hospital Zurich, University of Zurich"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+# Define variables, you could also source an R script that outputs these variables
+SampleID <- "XYZ_STUDY_D.XYZ003_DNA"
+CodingVariant <- "ENST00000380588.4:c.53G>A"
+ProteinVariant <- "ENSP00000369962.4:p.Trp18Ter"
+ACMGScore <- 2
+```
+
+## Results
+test
+### Causal Variant Summary
+
+- **Sample ID:** <span style="color:red;">`r SampleID`</span>
+- **HGVSc coding variant:** <span style="color:red;">`r CodingVariant`</span>
+- **Protein variant:** <span style="color:red;">`r ProteinVariant`</span>
+- **ACMG score:** <span style="color:red;">`r ACMGScore`</span>
+
+<!-- ![ACMGuru automated analysis...](../output/aggregate_variants_per_criteria.pdf) -->
+
+```{r criteria-count-plot, echo=FALSE, message=FALSE, results='asis', fig.keep='all'}
+# Source the script that generates the plot
+# source("../tests/test_main_filter.R")
+capture.output(source("../tests/test_main_filter.R"), file = NULL)
+
+
+# If the plot is assigned to a variable but not explicitly printed in the sourced script, print it here
+print(p.criteria_count_each_gene)
+```
+
+
+#### Causal Variant Evidence Interpretation
+
+The analysis of variant interpretation performed by ACMGuru is summarised from the following evidence sources:
+
+[This document's source code is available from the GitHub repository](https://github.com/DylanLawless/kit_assess/blob/master/latex/report.tex).
+
+All code used in this report is available on the [GitHub repository](https://github.com/DylanLawless/kit_assess).

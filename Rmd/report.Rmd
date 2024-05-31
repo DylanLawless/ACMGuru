@@ -5,6 +5,8 @@ output:
     toc: true
     toc_depth: 2
     number_sections: true
+    includes:
+      in_header: header.html
   # pdf_document:
   #   toc: true
   #   toc_depth: 2
@@ -12,45 +14,19 @@ theme: cerulean
 ---
 
 ```{css, echo=FALSE}
-.kispiblue {
-    color: #701A57; /* Replace #ff0000 with your hex color value */
-}
+.kispiblue { color: #701A57; }
 ```
 
 <style type="text/css">
-
-body{ /* Normal  */
-      font-size: 12px;
-      <!-- font-family: "Times New Roman", Times, serif; -->
-  }
-td {  /* Table  */
-  font-size: 8px;
-}
-h1.title {
-  font-size: 38px;
-  color: black;
-}
-h1 { /* Header 1 */
-  font-size: 28px;
-  color: black;
-}
-h2 { /* Header 2 */
-    font-size: 22px;
-  color: black;
-}
-h3 { /* Header 3 */
-  font-size: 18px;
-  <!-- font-family: "Times New Roman", Times, serif; -->
-  color: black;
-}
-code.r{ /* Code block */
-    font-size: 12px;
-}
-pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
-}
+body{ /* Normal  */ font-size: 12px; <!-- font-family: "Times New Roman", Times, serif; --> }
+td {  /* Table  */ font-size: 8px; }
+h1.title { font-size: 38px; color: black; }
+h1 { /* Header 1 */ font-size: 28px; color: black; }
+h2 { /* Header 2 */ font-size: 22px; color: black; }
+h3 { /* Header 3 */ font-size: 18px; <!-- font-family: "Times New Roman", Times, serif; -->  color: black; }
+code.r{ /* Code block */ font-size: 12px; }
+pre { /* Code block - determines code spacing between lines */ font-size: 14px; }
 </style>
-
 
 **Author:** <span class="kispiblue">
 Dylan Lawless, PhD
@@ -70,6 +46,13 @@ ProteinVariant <- "ENSP00000369962.4:p.Trp18Ter"
 ACMGScore <- 2
 ```
 
+<pre><code>
+h2030gc fastq file names:
+&lt;SAMPLE_ID&gt;_&lt;NGS_ID&gt;_&lt;POOL_ID&gt;_&lt;S#&gt;_&lt;LANE&gt;_&lt;R1|R2&gt;.fastq.gz
+and Illumina fastq header:
+@&lt;instrument&gt;:&lt;run number&gt;:&lt;flowcell ID&gt;:&lt;lane&gt;:&lt;tile&gt;:&lt;x-pos&gt;:&lt;y-pos&gt; &lt;read&gt;:&lt;is filtered&gt;:&lt;control number&gt;:&lt;sample number&gt;
+</code></pre>
+
 # Introduction
 
 The two datasets (Sample ID: <span class="kispiblue">XYZ_STUDY_D.XYZ003_DNA</span> and reference CH S2) of paired-end short reads were generated from the same human DNA NGS library protocol for clinical diagnosis of phenotype X. Clinical grade sequencing (ISO 15189 accredited) was used to generate whole genome sequence (WGS) data at the Swiss Multi-Omic Center (SMOC) ([SMOC](http://smoc.ethz.ch)). The Illumina Novaseq6000 platform was used in combination with TruSeq DNA PCR-Free library preparation. Analysis was performed with reference to GRCh38. Handling of sensitive clinical data according to established SPHN/BioMedIT guidelines on the sciCORE platform as part of SwissPedHealth ([SPHN/BioMedIT](https://sphn.ch/network/projects/biomedit/)). Herein, we evaluate sample performance for use in clinical diagnosis.
@@ -78,15 +61,6 @@ The two datasets (Sample ID: <span class="kispiblue">XYZ_STUDY_D.XYZ003_DNA</spa
 <!-- <SAMPLE_ID>_<NGS_ID>_<POOL_ID>_<S#>_<LANE>_<R1|R2>.fastq.gz -->
 <!-- and Illumina fastq header: -->
 <!-- @<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number> -->
-
-
-<pre><code>
-h2030gc fastq file names:
-&lt;SAMPLE_ID&gt;_&lt;NGS_ID&gt;_&lt;POOL_ID&gt;_&lt;S#&gt;_&lt;LANE&gt;_&lt;R1|R2&gt;.fastq.gz
-and Illumina fastq header:
-@&lt;instrument&gt;:&lt;run number&gt;:&lt;flowcell ID&gt;:&lt;lane&gt;:&lt;tile&gt;:&lt;x-pos&gt;:&lt;y-pos&gt; &lt;read&gt;:&lt;is filtered&gt;:&lt;control number&gt;:&lt;sample number&gt;
-</code></pre>
-
 
 # Results
 ## Causal variant summary
@@ -125,6 +99,11 @@ datatable(dt_selected_sub, options = list(
   initComplete = JS("function(settings, json) { $(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'}); }")
 ))
 ```
+
+## 3D Structure Viewer
+To do: forward pdb from AutoDesrtuctR.
+
+<div style="height: 400px; width: 100%; position: relative;" class='viewer_3Dmoljs' data-pdb='1YCR' data-backgroundalpha='0' data-style='cartoon:color=spectrum' data-surface='opacity:0.5;color:white' data-spin='axis:y;speed:0.1'></div>
 
 
 ## Causal variant evidence interpretation

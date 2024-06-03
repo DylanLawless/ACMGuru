@@ -10,6 +10,11 @@ Richards et al.'s joint consensus recommendation on the standards and guidelines
 
 Accepts VCF format.
 
+## Example report
+View the example report generated
+
+[Work in progress: report.html](https://html-preview.github.io/?url=https://github.com/DylanLawless/ACMGuru/blob/main/Rmd/report.html)
+
 ## gitignore
 
 Untracked test files in `./output` (automatic user ouput) and in `./data/` due to file sizes:

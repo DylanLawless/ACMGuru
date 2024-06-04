@@ -1,0 +1,55 @@
+~/data/wgs/log/vep$ cat vep_60181.out
+START AT Tue Jun  4 20:35:08 CEST 2024
+--------------------------------------
+SBATCH Parameters of script /var/spool/slurmd/job60181/slurm_script:
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task 14
+#SBATCH --mem 30G
+#SBATCH --time 24:00:00
+#SBATCH --job-name=vep
+#SBATCH --output=/project/home/user/data/wgs/log/vep/vep_%J.out
+#SBATCH --error=/project/home/user/data/wgs/log/vep/vep_%J.err
+#SBATCH --partition=all-nodes-cpu
+#SBATCH --array=0-23
+--------------------------------------
+Processing chromosome: Y
+Processing file .....: /project/home/user/data/wgs/pre_annotation_maf/chrY_bcftools_gatk_norm_decom_maf0.4.recode.vcf.gz
+Outputting to .......: /project/home/user/data/wgs/annotation/chrY_bcftools_gatk_norm_decom_maf0.4.recode_vep.vcf
+Using VEP version ...: 95
+VEP cache ...........: /project/home/user/data/db/vep95/cache
+VEP plugin ..........: /project/home/user/data/db/vep95/plugins
+--------------------------------------
+
+--------------------------------------
+Done VEP for chromosome Y Tue Jun  4 20:35:15 CEST 2024
+--------------------------------------
+
+------------------
+VEP report
+------------------
+
+Task: to prepare variant annotation
+and qualifying variants for ML projects.
+
+File in:
+/project/home/user/data/wgs/pre_annotation_maf/chrY_bcftools_gatk_norm_decom_maf0.4.recode.vcf.gz
+File out:
+/project/home/user/data/wgs/annotation/chrY_bcftools_gatk_norm_decom_maf0.4.recode_vep.vcf
+
+Number of lines:
+wc -l /project/home/user/data/wgs/annotation/chrY_bcftools_gatk_norm_decom_maf0.4.recode_vep.vcf
+
+We use ref genome:
+/project/home/user/data/ref/GRCH38_no_alt/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa.gz
+
+We use VEP cache:
+/project/home/user/data/db/vep95/cache
+
+We use VEP plugin dir:
+/project/home/user/data/db/vep95/plugins
+
+------------------
+Complete VEP
+------------------
+END AT Tue Jun  4 20:35:15 CEST 2024

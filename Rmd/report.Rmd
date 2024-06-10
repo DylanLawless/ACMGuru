@@ -18,7 +18,7 @@ theme: cerulean
 ```
 
 <style type="text/css">
-body{ /* Normal  */ font-size: 12px; <!-- font-family: "Times New Roman", Times, serif; --> }
+body{ /* Normal  */ font-size: 14px; <!-- font-family: "Times New Roman", Times, serif; --> }
 td {  /* Table  */ font-size: 8px; }
 h1.title { font-size: 38px; color: black; }
 h1 { /* Header 1 */ font-size: 28px; color: black; }
@@ -53,6 +53,14 @@ and Illumina fastq header:
 @&lt;instrument&gt;:&lt;run number&gt;:&lt;flowcell ID&gt;:&lt;lane&gt;:&lt;tile&gt;:&lt;x-pos&gt;:&lt;y-pos&gt; &lt;read&gt;:&lt;is filtered&gt;:&lt;control number&gt;:&lt;sample number&gt;
 </code></pre>
 
+<div style="float: right; width: 25%;">
+  <img src="../images/DALLE_guru.jpg" alt="VEP Consequences" style="width: 100%;"/>
+</div>
+
+
+**Note:** Ensure that the path to the image is correct and accessible from the document. If `VEP_consequences` is not the full filename, include the proper extension, like `.png` or `.jpg`.
+
+
 # Introduction
 
 The two datasets (Sample ID: <span class="kispiblue">XYZ_STUDY_D.XYZ003_DNA</span> and reference CH S2) of paired-end short reads were generated from the same human DNA NGS library protocol for clinical diagnosis of phenotype X. Clinical grade sequencing (ISO 15189 accredited) was used to generate whole genome sequence (WGS) data at the Swiss Multi-Omic Center (SMOC) ([SMOC](http://smoc.ethz.ch)). The Illumina Novaseq6000 platform was used in combination with TruSeq DNA PCR-Free library preparation. Analysis was performed with reference to GRCh38. Handling of sensitive clinical data according to established SPHN/BioMedIT guidelines on the sciCORE platform as part of SwissPedHealth ([SPHN/BioMedIT](https://sphn.ch/network/projects/biomedit/)). Herein, we evaluate sample performance for use in clinical diagnosis.
@@ -69,6 +77,14 @@ The two datasets (Sample ID: <span class="kispiblue">XYZ_STUDY_D.XYZ003_DNA</spa
 - **HGVSc coding variant:** <span class="kispiblue">`r CodingVariant`</span>
 - **Protein variant:** <span class="kispiblue">`r ProteinVariant`</span>
 - **ACMG score:** <span class="kispiblue">`r ACMGScore`</span>
+
+Read about the ACMG classification [scoring system and protocol here](https://lawlessgenomics.com/topic/acgm-criteria-table-main).
+
+<div style="float: center; width: 60%;">
+  <img src="../images/VEP_consequences.jpg" alt="VEP Consequences" style="width: 100%;"/>
+</div>
+
+
 
 <!-- ![ACMGuru automated analysis...](../output/aggregate_variants_per_criteria.pdf) -->
 
@@ -136,6 +152,17 @@ Figure:
 knitr::include_graphics(c("./images/acmguru/plink_assoc_ppman_qq.png", "./images/acmguru/ppi_network_22.png"))
 ```
 
+# Methods
+
+<div style="float: right; width: 50%;">
+  <img src="../images/variant_annotation_graph.png" alt="VEP Consequences" style="width: 100%;"/>
+</div>
+
+This analysis consisted of germline short variant discovery (SNPs + Indels) using GATK v4.5.0 and interpretation using ACMGuru.
+Read the full [public methods protocol page use here](http://127.0.0.1:4000/pages/design_doc/dna_germline_short.html).
+
+
+
 # Fastq Data
 
 To assess the quality of fastq data, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) was used. Full HTML reports for each file are linked below:
@@ -147,6 +174,8 @@ To assess the quality of fastq data, [FastQC](https://www.bioinformatics.babraha
 
 The results of FastQC were also assessed by use of [fastqcr](https://rpkgs.datanovia.com/fastqcr/index.html). The full HTML report is linked here:
 - [Report assessment of FastQC](https://lawlessgenomics.com/pages/sophia/qc_report.html)
+
+<iframe src="../data/example_NGS000011111_NA_S23_L001_fastp.html" width="100%" height="600px" frameborder="0"></iframe>
 
 ## Quality Assessment
 

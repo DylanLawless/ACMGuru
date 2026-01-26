@@ -13,7 +13,7 @@ Accepts VCF format.
 ## Example report
 View the example report generated
 
-[Work in progress: report.html](https://html-preview.github.io/?url=https://github.com/DylanLawless/ACMGuru/blob/main/Rmd/report.html)
+[report.html](https://html-preview.github.io/?url=https://github.com/DylanLawless/ACMGuru/blob/main/Rmd/report.html)
 
 ## gitignore
 
@@ -44,38 +44,6 @@ data/uniprot/uniprot_naIDs_convert.tsv
 - Generation of standardised labels for candidate causal variants.
 - Customisation options for filtering and annotation criteria.
 - Comprehensive visualization tools for interpreting filtering and annotation results.
-
-## NOTE: THIS PROJECT IS NOT COMPLETE
-
-The following directions are for development and will be updated for users shortly.
-
-## Installation
-
-To install the latest development version of ACMGuru from GitHub:
-
-```r
-# install.packages("devtools")
-devtools::install_github("your_github_username/ACMGuru")
-```
-
-## Usage
-
-```
-library(ACMGuru)
-
-# Load your genomic data
-genomic_data <- ...
-
-# Apply ACMGuru annotation and filtering
-result <- ACMGuru::acmg_filter(genomic_data)
-
-# Visualize results
-ACMGuru::plot_result(result)
-```
-
-## Documentation
-
-For more detailed information on using ACMGuru, see the package vignette or the reference manual.
 
 ## Rule columns
 
@@ -238,13 +206,3 @@ PROVEAN, PROVEAN_score
 REVEL, REVEL_score
 SIFT, SIFT_score
 ```
-
-## Contributing
-
-I welcome contributions of all types! Please see Contributing Guide for more details.
-
-## Contact
-
-Please report any issues or questions on the GitHub Issues page.
-
-"link_to_vignette", "link_to_reference_manual", "link_to_contributing_guide", "license",
